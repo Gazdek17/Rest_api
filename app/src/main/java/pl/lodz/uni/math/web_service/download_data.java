@@ -1,6 +1,7 @@
 package pl.lodz.uni.math.web_service;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,7 @@ public class download_data extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            URL url = new URL("https://api.myjson.com/bins/l81ul");
+            URL url = new URL("https://api.myjson.com/bins/vlf7h");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -39,12 +40,14 @@ public class download_data extends AsyncTask<Void,Void,Void> {
 
             for (int i=0; i<JA.length() ; i++){
                 JSONObject JO = (JSONObject) JA.get(i);
-                singleParsed = "name"+ JO.get("name")+ "\n"+
-                               "password"+ JO.get("password")+ "\n"+
-                               "contack"+ JO.get("contack")+ "\n"+
-                               "country"+ JO.get("country")+ "\n";
 
-                dataParsed = dataParsed + singleParsed + "\n";
+                    singleParsed = "Imie: "+ JO.get("imię")+ "\n"+
+                            "Nazwisko: "+ JO.get("nazwisko")+ "\n"+
+                            "Numer tel.: "+ JO.get("telefon")+ "\n"+
+                            "Miasto: "+ JO.get("miasto")+ "\n"+
+                            "E-mail: "+ JO.get("e-mail")+ "\n";
+
+                    dataParsed = dataParsed + singleParsed + "\n";
             }
 
         } catch (MalformedURLException e) {
